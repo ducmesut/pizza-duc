@@ -1,0 +1,4 @@
+OrderingDucData #class
+pizza.duc.OrderingDuc #namespace
+orderingDucData pizza.duc.OrderingDucData #field
+orderingDucData PERSISTENT #fieldModifier

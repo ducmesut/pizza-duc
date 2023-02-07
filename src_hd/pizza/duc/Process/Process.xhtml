@@ -1,0 +1,233 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pm="http://primefaces.org/mobile">
+<h:body>
+	<ui:composition template="/layouts/basic.xhtml">
+		<ui:define name="title">Process Duc</ui:define>
+		<ui:define name="content">
+			<div class="card">
+				<h:outputText style="padding-left: 81%" value="Hi, #{data.role}   " />
+				<p:commandButton actionListener="#{logic.logout}" value="Logout" />
+				<p:tabView>
+					<p:tab title="Pending Orders"
+						rendered="#{data.role.equals('reception')}">
+						<h:form id="formPending">
+							<p:dataTable id="pending" var="order"
+								value="#{data.pedingOrders}" rowKey="#{order.id}">
+								<f:facet name="header">
+               List Pending Orders
+            </f:facet>
+
+								<p:column headerText="Order No">
+									<h:outputText value="#{order.id}" />
+								</p:column>
+								<p:column headerText="Date">
+									<h:outputText value="#{order.time}" />
+								</p:column>
+								<p:column headerText="Item">
+									<ui:repeat value="#{order.products}" var="product">
+										<h:outputText
+											value="#{product.name} | #{product.quantity} | #{product.price}$" />
+										<br></br>
+									</ui:repeat>
+								</p:column>
+								<p:column headerText="Name">
+									<h:outputText value="#{order.cusName}" />
+								</p:column>
+								<p:column headerText="Phone Number">
+									<h:outputText value="#{order.cusPhone}" />
+								</p:column>
+								<p:column headerText="Deliver To">
+									<h:outputText value="#{order.address}" />
+								</p:column>
+								<p:column headerText="Total Price">
+									<h:outputText value="#{order.totalPrice}$" />
+								</p:column>
+								<p:column headerText="Action">
+
+									<p:commandButton
+										actionListener="#{logic.updateOrders(2, order.id)}"
+										value="Confirm" update="@all"/>
+									<br> </br>
+									<p:commandButton
+										actionListener="#{logic.updateOrders(11, order.id)}"
+										value="Cancel" update="@all"/>
+								</p:column>
+							</p:dataTable>
+
+						</h:form>
+					</p:tab>
+					<p:tab title="Cofirming Orders"
+						rendered="#{data.role.equals('chef')}">
+						<h:form id="formCofirming">
+							<p:dataTable id="confirming" var="order"
+								value="#{data.confirmingOrders}" rowKey="#{order.id}">
+								<f:facet name="header">
+               List Cofirming Orders
+            </f:facet>
+
+								<p:column headerText="Order No">
+									<h:outputText value="#{order.id}" />
+								</p:column>
+								<p:column headerText="Date">
+									<h:outputText value="#{order.time}" />
+								</p:column>
+								<p:column headerText="Item">
+									<ui:repeat value="#{order.products}" var="product">
+										<h:outputText
+											value="#{product.name} | #{product.quantity} | #{product.price}$" />
+										<br></br>
+									</ui:repeat>
+								</p:column>
+								<p:column headerText="Name">
+									<h:outputText value="#{order.cusName}" />
+								</p:column>
+								<p:column headerText="Phone Number">
+									<h:outputText value="#{order.cusPhone}" />
+								</p:column>
+								<p:column headerText="Deliver To">
+									<h:outputText value="#{order.address}" />
+								</p:column>
+								<p:column headerText="Total Price">
+									<h:outputText value="#{order.totalPrice}$" />
+								</p:column>
+								<p:column headerText="Action">
+									<p:commandButton
+										actionListener="#{logic.updateOrders(3, order.id)}"
+										value="Done" update="@all"/>
+								</p:column>
+							</p:dataTable>
+
+						</h:form>
+
+					</p:tab>
+					<p:tab title="Delivering Orders"
+						rendered="#{data.role.equals('deliver')}">
+						<h:form id="formDelivering">
+							<p:dataTable id="delivering" var="order"
+								value="#{data.deliveringOrders}" rowKey="#{order.id}">
+								<f:facet name="header">
+               List Delivering Orders
+            </f:facet>
+
+								<p:column headerText="Order No">
+									<h:outputText value="#{order.id}" />
+								</p:column>
+								<p:column headerText="Date">
+									<h:outputText value="#{order.time}" />
+								</p:column>
+								<p:column headerText="Item">
+									<ui:repeat value="#{order.products}" var="product">
+										<h:outputText
+											value="#{product.name} | #{product.quantity} | #{product.price}$" />
+										<br></br>
+									</ui:repeat>
+								</p:column>
+								<p:column headerText="Name">
+									<h:outputText value="#{order.cusName}" />
+								</p:column>
+								<p:column headerText="Phone Number">
+									<h:outputText value="#{order.cusPhone}" />
+								</p:column>
+								<p:column headerText="Deliver To">
+									<h:outputText value="#{order.address}" />
+								</p:column>
+								<p:column headerText="Total Price">
+									<h:outputText value="#{order.totalPrice}$" />
+								</p:column>
+								<p:column headerText="Action">
+
+									<p:commandButton
+										actionListener="#{logic.updateOrders(12, order.id)}"
+										value="Done" update="@all"/>
+
+								</p:column>
+							</p:dataTable>
+
+						</h:form>
+					</p:tab>
+					<p:tab title="Done Orders"
+						rendered="#{data.role.equals('manager')}">
+						<h:form id="formDone">
+							<p:dataTable id="done" var="order" value="#{data.doneOrders}"
+								rowKey="#{order.id}">
+								<f:facet name="header">
+               List Done Orders
+            </f:facet>
+
+								<p:column headerText="Order No">
+									<h:outputText value="#{order.id}" />
+								</p:column>
+								<p:column headerText="Date">
+									<h:outputText value="#{order.time}" />
+								</p:column>
+								<p:column headerText="Item">
+									<ui:repeat value="#{order.products}" var="product">
+										<h:outputText
+											value="#{product.name} | #{product.quantity} | #{product.price}$" />
+										<br></br>
+									</ui:repeat>
+								</p:column>
+								<p:column headerText="Name">
+									<h:outputText value="#{order.cusName}" />
+								</p:column>
+								<p:column headerText="Phone Number">
+									<h:outputText value="#{order.cusPhone}" />
+								</p:column>
+								<p:column headerText="Deliver To">
+									<h:outputText value="#{order.address}" />
+								</p:column>
+								<p:column headerText="Total Price">
+									<h:outputText value="#{order.totalPrice}$" />
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</p:tab>
+					<p:tab title="Rejected Orders"
+						rendered="#{data.role.equals('manager')}">
+						<h:form id="formReject">
+							<p:dataTable id="rejected" var="order"
+								value="#{data.rejectedOrders}" rowKey="#{order.id}">
+								<f:facet name="header">
+               List Rejected Orders
+            </f:facet>
+
+								<p:column headerText="Order No">
+									<h:outputText value="#{order.id}" />
+								</p:column>
+								<p:column headerText="Date">
+									<h:outputText value="#{order.time}" />
+								</p:column>
+								<p:column headerText="Item">
+									<ui:repeat value="#{order.products}" var="product">
+										<h:outputText
+											value="#{product.name} | #{product.quantity} | #{product.price}$" />
+										<br></br>
+									</ui:repeat>
+								</p:column>
+								<p:column headerText="Name">
+									<h:outputText value="#{order.cusName}" />
+								</p:column>
+								<p:column headerText="Phone Number">
+									<h:outputText value="#{order.cusPhone}" />
+								</p:column>
+								<p:column headerText="Deliver To">
+									<h:outputText value="#{order.address}" />
+								</p:column>
+								<p:column headerText="Total Price">
+									<h:outputText value="#{order.totalPrice}$" />
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</p:tab>
+				</p:tabView>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,14 @@
+ProcessData #class
+pizza.duc.Process #namespace
+role String #field
+role PERSISTENT #fieldModifier
+pedingOrders List<pizza.duc.Order> #field
+pedingOrders PERSISTENT #fieldModifier
+confirmingOrders List<pizza.duc.Order> #field
+confirmingOrders PERSISTENT #fieldModifier
+deliveringOrders List<pizza.duc.Order> #field
+deliveringOrders PERSISTENT #fieldModifier
+rejectedOrders List<pizza.duc.Order> #field
+rejectedOrders PERSISTENT #fieldModifier
+doneOrders List<pizza.duc.Order> #field
+doneOrders PERSISTENT #fieldModifier

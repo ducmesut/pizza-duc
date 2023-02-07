@@ -1,0 +1,14 @@
+Product #class
+pizza.duc #namespace
+id Integer #field
+id PERSISTENT #fieldModifier
+name String #field
+name PERSISTENT #fieldModifier
+price Number #field
+price PERSISTENT #fieldModifier
+img String #field
+img PERSISTENT #fieldModifier
+type Number #field
+type 'type 1 = drinks. type 2 = foods' #fieldComment
+type PERSISTENT #fieldModifier
+quantity Number #field

@@ -1,0 +1,4 @@
+LoginData #class
+pizza.duc.Login #namespace
+loginData pizza.duc.LoginData #field
+loginData PERSISTENT #fieldModifier

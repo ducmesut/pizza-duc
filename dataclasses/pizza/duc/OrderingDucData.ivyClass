@@ -1,0 +1,5 @@
+OrderingDucData #class
+pizza.duc #namespace
+foods List<pizza.duc.Product> #field
+drinks List<pizza.duc.Product> #field
+order pizza.duc.Order #field

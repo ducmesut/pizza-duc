@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<role>
+    <identifier>Everybody</identifier>
+    <role>
+        <identifier>Reception</identifier>
+        <displayName>Reception</displayName>
+    </role>
+    <role>
+        <identifier>Deliver</identifier>
+        <displayName>Deliver</displayName>
+    </role>
+    <role>
+        <identifier>Chef</identifier>
+        <displayName>Chef</displayName>
+    </role>
+    <role>
+        <identifier>Manager</identifier>
+        <displayName>Manager</displayName>
+    </role>
+</role>

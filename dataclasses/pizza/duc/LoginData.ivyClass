@@ -1,0 +1,5 @@
+LoginData #class
+pizza.duc #namespace
+username String #field
+password String #field
+isValid Boolean #field

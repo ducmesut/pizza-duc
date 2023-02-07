@@ -1,0 +1,11 @@
+Order #class
+pizza.duc #namespace
+id Integer #field
+cusName String #field
+cusPhone String #field
+address String #field
+products List<pizza.duc.Product> #field
+totalPrice Number #field
+time java.util.Date #field
+status Integer #field
+status '1 Pending/2 Confirming/3 Delivering/ 11 reject/12 DONE' #fieldComment

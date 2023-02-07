@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userConfig>
+    <user>
+        <username>reception</username>
+        <password>123</password>
+        <fullName>reception</fullName>
+        <emailAddress>reception@gmail.com</emailAddress>
+        <role>Reception</role>
+    </user>
+    <user>
+        <username>chef</username>
+        <password>123</password>
+        <fullName>chef</fullName>
+        <emailAddress>chef@gmail.com</emailAddress>
+        <role>Chef</role>
+    </user>
+    <user>
+        <username>deliver</username>
+        <password>123</password>
+        <fullName>deliver</fullName>
+        <emailAddress>deliver@gmail.com</emailAddress>
+        <role>Deliver</role>
+    </user>
+    <user>
+        <username>manager</username>
+        <password>123</password>
+        <fullName>manager</fullName>
+        <emailAddress>manager@gmail.com</emailAddress>
+        <role>Manager</role>
+    </user>
+</userConfig>

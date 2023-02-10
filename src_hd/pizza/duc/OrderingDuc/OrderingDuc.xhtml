@@ -13,7 +13,8 @@
 			<div class="card">
 				<p:tabView>
 					<p:tab title="Choose Pizza">
-						<h:form id="formA">
+						<h:form id="formPizza">
+							<p:growl id="msgs" showDetail="true" />
 							<div style="display: table; clear: both;">
 								<ui:repeat value="#{data.orderingDucData.foods}" var="food">
 									<div style="float: left; width: 50%;">
@@ -25,15 +26,17 @@
 											<f:convertNumber currencySymbol="$" type="currency" />
 										</h:outputText>
 										<br></br>
-										<p:commandButton actionListener="#{logic.order(food.id)}"
-											value="Order" update="j_id_g:formEnd"/>
+										<p:commandButton
+											actionListener="#{logic.order(food.id, food.name)}"
+											value="Order" update="j_id_g:formPay j_id_g:formPizza" />
 									</div>
 								</ui:repeat>
 							</div>
 						</h:form>
 					</p:tab>
 					<p:tab title="Choose Drinks">
-						<h:form id="formB">
+						<h:form id="formDrinks">
+							<p:growl id="msgs" showDetail="true" />
 							<div style="display: table; clear: both;">
 								<ui:repeat value="#{data.orderingDucData.drinks}" var="drink">
 									<div style="float: left; width: 50%;">
@@ -46,8 +49,9 @@
 											<f:convertNumber currencySymbol="$" type="currency" />
 										</h:outputText>
 										<br></br>
-										<p:commandButton actionListener="#{logic.order(drink.id)}"
-											value="Order" update="j_id_g:formEnd"/>
+										<p:commandButton
+											actionListener="#{logic.order(drink.id, drink.name)}"
+											value="Order" update="j_id_g:formPay j_id_g:formDrinks" />
 									</div>
 								</ui:repeat>
 							</div>

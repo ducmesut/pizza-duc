@@ -69,7 +69,7 @@ public class ProductService {
 
 	public static List<Product> orderProduct(List<Product> list, Integer id) {
 		Product product = getProductByIdWithList(list, id);
-		if (product==null) {
+		if (product == null) {
 			product = getProductByIdWithList(listInitProduct, id);
 			product.setQuantity(1);
 			list.add(product);
@@ -81,8 +81,30 @@ public class ProductService {
 		return list;
 	}
 
+	// Plus is true || Minus is false
+	public static List<Product> handleProductlist(List<Product> list,
+			Integer id, boolean plusOrMinus) {
+		Product product = getProductByIdWithList(list, id);
+		int index = list.indexOf(product);
+		if (plusOrMinus) {
+
+			product.setQuantity(product.getQuantity().intValue() + 1);
+			list.set(index, product);
+		} else {
+
+			product.setQuantity(product.getQuantity().intValue() - 1);
+			if (product.getQuantity().intValue() == 0) {
+				list.remove(index);
+			} else {
+				list.set(index, product);
+			}
+		}
+		return list;
+	}
+
 	public static Product getProductByIdWithList(List<Product> list, Integer id) {
-		if(list.isEmpty()) return null;
+		if (list.isEmpty())
+			return null;
 		return list.stream().filter(product -> product.getId() == id).findAny()
 				.orElse(null);
 	}

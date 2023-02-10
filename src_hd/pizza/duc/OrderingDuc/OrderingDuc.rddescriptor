@@ -10,10 +10,38 @@
             <parameterType>java.lang.Integer</parameterType>
             <nullPermitted>false</nullPermitted>
         </inputParameter>
+        <inputParameter>
+            <name>name</name>
+            <description></description>
+            <parameterType>String</parameterType>
+            <nullPermitted>false</nullPermitted>
+        </inputParameter>
     </method>
     <method>
         <name>orderNow</name>
         <description></description>
+    </method>
+    <method>
+        <name>handle</name>
+        <description></description>
+        <inputParameter>
+            <name>id</name>
+            <description></description>
+            <parameterType>java.lang.Integer</parameterType>
+            <nullPermitted>false</nullPermitted>
+        </inputParameter>
+        <inputParameter>
+            <name>name</name>
+            <description></description>
+            <parameterType>String</parameterType>
+            <nullPermitted>false</nullPermitted>
+        </inputParameter>
+        <inputParameter>
+            <name>isPlus</name>
+            <description></description>
+            <parameterType>Boolean</parameterType>
+            <nullPermitted>false</nullPermitted>
+        </inputParameter>
     </method>
     <startMethod>
         <name>start</name>

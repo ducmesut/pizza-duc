@@ -8,24 +8,23 @@
 	xmlns:pm="http://primefaces.org/mobile">
 <h:body>
 	<ui:composition template="/layouts/basic.xhtml">
-		<ui:define name="title">Login Duc</ui:define>
+		<ui:define name="title">Login Duc</ui:define>	
 		<ui:define name="content">
 			<div class="card">
-				<h:form id="formEnd" style="padding:20px">
+				<h:form id="form-login" style="padding:20px">
+					<p:growl id="msgs" showDetail="true" />
 					<div class="form-group">
 						<label>User Name: </label>
 						<p:inputText styleClass="btn btn-secondary btn-lg btn-block"
-							required="true" value="#{data.loginData.username}"
-							id="name" />
+							required="true" value="#{data.loginData.username}" id="name" />
 					</div>
 					<div class="form-group">
 						<label>Password: </label>
 						<p:inputText styleClass="btn btn-secondary btn-lg btn-block"
-							required="true" value="#{data.loginData.password}"
-							id="phone" />
+							required="true" value="#{data.loginData.password}" id="password" />
 					</div>
-						<p:commandButton actionListener="#{logic.login()}"
-								value="Login" />
+					<p:commandButton actionListener="#{logic.login()}" value="Login"
+						update="@all" />
 				</h:form>
 			</div>
 		</ui:define>

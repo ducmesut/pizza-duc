@@ -1,5 +1,5 @@
 [Ivy]
-[>Created: Tue Feb 07 14:05:15 ICT 2023]
+[>Created: Thu Feb 09 19:05:02 ICT 2023]
 186224FB97725BC2 3.18 #module
 >Proto >Proto Collection #zClass
 Os0 OrderingDucProcess Big #zClass
@@ -33,6 +33,8 @@ Os0 @PushWFArc f15 '' #zField
 Os0 @GridStep f16 '' #zField
 Os0 @PushWFArc f17 '' #zField
 Os0 @PushWFArc f13 '' #zField
+Os0 @RichDialogMethodStart f18 '' #zField
+Os0 @PushWFArc f19 '' #zField
 >Proto Os0 Os0 OrderingDucProcess #zField
 Os0 f0 guid 186224FB99523D7B #txt
 Os0 f0 type pizza.duc.OrderingDuc.OrderingDucData #txt
@@ -44,6 +46,7 @@ Os0 f0 inParameterDecl 'ch.ivyteam.ivy.richdialog.exec.RdMethodCallEvent methodE
 Os0 f0 inParameterMapAction 'out.orderingDucData=param.orderingDucData;
 out.orderingDucData.drinks=param.orderingDucData.drinks;
 out.orderingDucData.foods=param.orderingDucData.foods;
+out.orderingDucData.order.products=null;
 ' #txt
 Os0 f0 outParameterDecl '<> result;
 ' #txt
@@ -86,13 +89,16 @@ Os0 f5 expr out #txt
 Os0 f5 109 160 211 160 #arcP
 Os0 f6 guid 1862576E4077A879 #txt
 Os0 f6 type pizza.duc.OrderingDuc.OrderingDucData #txt
-Os0 f6 method order(java.lang.Integer) #txt
+Os0 f6 method order(java.lang.Integer,String) #txt
 Os0 f6 disableUIEvents false #txt
 Os0 f6 inParameterDecl 'ch.ivyteam.ivy.richdialog.exec.RdMethodCallEvent methodEvent = event as ch.ivyteam.ivy.richdialog.exec.RdMethodCallEvent;
-<java.lang.Integer id> param = methodEvent.getInputArguments();
+<java.lang.Integer id,java.lang.String name> param = methodEvent.getInputArguments();
 ' #txt
-Os0 f6 inActionCode 'out.orderingDucData.order.products=service.ProductService.orderProduct(out.orderingDucData.order.products, param.id);
-' #txt
+Os0 f6 inActionCode 'import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
+out.orderingDucData.order.products=service.ProductService.orderProduct(out.orderingDucData.order.products, param.id);
+FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Great!!! Your ordered 1 product with name: " + param.name);
+FacesContext.getCurrentInstance().addMessage(null, msg);' #txt
 Os0 f6 outParameterDecl '<> result;
 ' #txt
 Os0 f6 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -118,6 +124,12 @@ Os0 f9 disableUIEvents false #txt
 Os0 f9 inParameterDecl 'ch.ivyteam.ivy.richdialog.exec.RdMethodCallEvent methodEvent = event as ch.ivyteam.ivy.richdialog.exec.RdMethodCallEvent;
 <> param = methodEvent.getInputArguments();
 ' #txt
+Os0 f9 inActionCode 'import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
+if(out.orderingDucData.order.products.isEmpty()){
+	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error!!! Your cart is empty");
+FacesContext.getCurrentInstance().addMessage(null, msg);
+	}' #txt
 Os0 f9 outParameterDecl '<> result;
 ' #txt
 Os0 f9 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -129,7 +141,7 @@ Os0 f9 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Os0 f9 84 324 24 24 -27 15 #rect
+Os0 f9 84 320 24 32 -27 15 #rect
 Os0 f9 @|RichDialogMethodStartIcon #fIcon
 Os0 f10 type pizza.duc.OrderingDuc.OrderingDucData #txt
 Os0 f10 192 320 32 32 0 16 #rect
@@ -192,6 +204,38 @@ Os0 f17 0 0.37819622579854584 -11 -21 #arcLabel
 Os0 f13 expr out #txt
 Os0 f13 424 288 483 259 #arcP
 Os0 f13 0 0.37819622579854584 -11 -21 #arcLabel
+Os0 f18 guid 186354D381C24551 #txt
+Os0 f18 type pizza.duc.OrderingDuc.OrderingDucData #txt
+Os0 f18 method handle(java.lang.Integer,String,Boolean) #txt
+Os0 f18 disableUIEvents false #txt
+Os0 f18 inParameterDecl 'ch.ivyteam.ivy.richdialog.exec.RdMethodCallEvent methodEvent = event as ch.ivyteam.ivy.richdialog.exec.RdMethodCallEvent;
+<java.lang.Integer id,java.lang.String name,java.lang.Boolean isPlus> param = methodEvent.getInputArguments();
+' #txt
+Os0 f18 inActionCode 'import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
+out.orderingDucData.order.products=service.ProductService.handleProductlist(out.orderingDucData.order.products, param.id, param.isPlus);
+FacesMessage msg;
+if(param.isPlus){
+	msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "You added 1 " + param.name);
+	}else{
+		msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "You removed 1 " + param.name);
+		}
+FacesContext.getCurrentInstance().addMessage(null, msg);' #txt
+Os0 f18 outParameterDecl '<> result;
+' #txt
+Os0 f18 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>handle(Integer,String,Boolean)</name>
+        <nameStyle>30,5,7
+</nameStyle>
+    </language>
+</elementInfo>
+' #txt
+Os0 f18 539 155 26 26 -84 15 #rect
+Os0 f18 @|RichDialogMethodStartIcon #fIcon
+Os0 f19 expr out #txt
+Os0 f19 539 171 220 252 #arcP
 >Proto Os0 .type pizza.duc.OrderingDuc.OrderingDucData #txt
 >Proto Os0 .processKind HTML_DIALOG #txt
 >Proto Os0 .xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -219,3 +263,5 @@ Os0 f17 head f16 mainIn #connect
 Os0 f10 out f15 tail #connect
 Os0 f16 mainOut f13 tail #connect
 Os0 f13 head f12 mainIn #connect
+Os0 f18 mainOut f19 tail #connect
+Os0 f19 head f7 mainIn #connect

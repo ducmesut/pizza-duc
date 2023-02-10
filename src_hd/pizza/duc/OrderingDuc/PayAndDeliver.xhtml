@@ -8,49 +8,65 @@
 	xmlns:pm="http://primefaces.org/mobile">
 <ui:composition>
 	<div id="pay-and-delivery-container">
-		<h:form id="formEnd" style="padding:20px">
-							<div class="form-group">
-								<label>Name: </label>
-								<p:inputText styleClass="btn btn-secondary btn-lg btn-block"
-									required="true" value="#{data.orderingDucData.order.cusName}"
-									id="name" />
-							</div>
-							<div class="form-group">
-								<label>Phone Number: </label>
-								<p:inputText styleClass="btn btn-secondary btn-lg btn-block"
-									required="true" value="#{data.orderingDucData.order.cusPhone}"
-									id="phone" />
-							</div>
-							<div class="form-group">
-								<label>Deliver to: </label>
-								<p:inputText styleClass="btn btn-secondary btn-lg btn-block"
-									required="true" value="#{data.orderingDucData.order.address}"
-									id="address" />
-							</div>
-							<div class="form-group">
-								<label>Order Details</label>
-							</div>
-							<p:dataTable id="products" var="product"
-								value="#{data.orderingDucData.order.products}"
-								rowKey="#{product.id}">
-								<f:facet name="header">
+		<h:form id="formInfo" style="padding:20px">
+
+			<div class="form-group">
+				<label>Name: </label>
+				<p:inputText styleClass="btn btn-secondary btn-lg btn-block"
+					required="true" value="#{data.orderingDucData.order.cusName}"
+					id="name" />
+			</div>
+			<div class="form-group">
+				<label>Phone Number: </label>
+				<p:inputText styleClass="btn btn-secondary btn-lg btn-block"
+					required="true" value="#{data.orderingDucData.order.cusPhone}"
+					id="phone" />
+			</div>
+			<div class="form-group">
+				<label>Deliver to: </label>
+				<p:inputText styleClass="btn btn-secondary btn-lg btn-block"
+					required="true" value="#{data.orderingDucData.order.address}"
+					id="address" />
+			</div>
+			<p:commandButton actionListener="#{logic.orderNow()}" value="Order"
+				update="j_id_g:formPay" />
+
+		</h:form>
+		<h:form id="formPay" style="padding:20px">
+			<div class="form-group">
+				<label>Order Details</label>
+			</div>
+			<p:dataTable id="products" var="product"
+				value="#{data.orderingDucData.order.products}"
+				rowKey="#{product.id}">
+				<f:facet name="header">
                List ordered products
             </f:facet>
 
-								<p:column headerText="Name">
-									<h:outputText value="#{product.name}" />
-								</p:column>
-								<p:column headerText="Price">
-									<h:outputText value="#{product.price}" />
-								</p:column>
-								<p:column headerText="Quantity">
-									<h:outputText value="#{product.quantity}" />
-								</p:column>
-							</p:dataTable>
+				<p:column headerText="Name">
+					<h:outputText value="#{product.name}" />
+				</p:column>
+				<p:column headerText="Price">
+					<h:outputText value="#{product.price}" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="#{product.quantity}" />
+				</p:column>
+				<p:column headerText="Action">
+					<p style="text-align: center">
+						<p:commandButton
+							actionListener="#{logic.handle(product.id, product.name, true)}"
+							value="+" update="j_id_g:formPay" />
+						<span>| </span>
+						<p:commandButton
+							actionListener="#{logic.handle(product.id, product.name, false)}"
+							value="-" update="j_id_g:formPay" />
+					</p>
+				</p:column>
+			</p:dataTable>
 
-							<p:commandButton actionListener="#{logic.orderNow()}"
-								value="Order" />
-						</h:form>
+			<p:growl id="msgs" showDetail="true" />
+		</h:form>
 	</div>
 </ui:composition>
 </html>

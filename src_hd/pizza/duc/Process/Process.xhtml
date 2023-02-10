@@ -8,11 +8,11 @@
 	xmlns:pm="http://primefaces.org/mobile">
 <h:body>
 	<ui:composition template="/layouts/basic.xhtml">
-		<ui:define name="title">Process Duc</ui:define>
+		<ui:define name="title">Process Duc</ui:define>	
 		<ui:define name="content">
 			<div class="card">
-				<h:outputText style="padding-left: 81%" value="Hi, #{data.role}   " />
-				<p:commandButton actionListener="#{logic.logout}" value="Logout" />
+				<h:outputText style="padding-left: 81%" value="Hi, #{data.role}   " />			
+				<p:commandLink actionListener="#{logic.logout}" value="Logout" />
 				<p:tabView>
 					<p:tab title="Pending Orders"
 						rendered="#{data.role.equals('reception')}">
@@ -50,11 +50,11 @@
 								</p:column>
 								<p:column headerText="Action">
 
-									<p:commandButton
+									<p:commandLink
 										actionListener="#{logic.updateOrders(2, order.id)}"
-										value="Confirm" update="@all"/>
-									<br> </br>
-									<p:commandButton
+										value="Confirm" update="@all" />
+									<span> | </span>
+									<p:commandLink
 										actionListener="#{logic.updateOrders(11, order.id)}"
 										value="Cancel" update="@all"/>
 								</p:column>
@@ -97,9 +97,9 @@
 									<h:outputText value="#{order.totalPrice}$" />
 								</p:column>
 								<p:column headerText="Action">
-									<p:commandButton
+									<p:commandLink
 										actionListener="#{logic.updateOrders(3, order.id)}"
-										value="Done" update="@all"/>
+										value="Done" update="@all" />
 								</p:column>
 							</p:dataTable>
 
@@ -142,7 +142,7 @@
 								</p:column>
 								<p:column headerText="Action">
 
-									<p:commandButton
+									<p:commandLink
 										actionListener="#{logic.updateOrders(12, order.id)}"
 										value="Done" update="@all"/>
 

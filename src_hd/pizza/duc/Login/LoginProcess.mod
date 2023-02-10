@@ -1,5 +1,5 @@
 [Ivy]
-[>Created: Tue Feb 07 21:01:57 ICT 2023]
+[>Created: Thu Feb 09 14:51:20 ICT 2023]
 1862AF2F542C1DBF 3.18 #module
 >Proto >Proto Collection #zClass
 Ls0 LoginProcess Big #zClass
@@ -102,9 +102,13 @@ Ls0 f6 inActionCode 'import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.ISecurityManager;
 import org.apache.commons.lang3.StringUtils;
 import ch.ivyteam.ivy.security.IUser;
+import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
 ISecurityManager securityManager = ch.ivyteam.ivy.security.internal.SecurityManager.getSecurityManager();
 ISession currentSession = securityManager.getCurrentSession();
-out.loginData.isValid = currentSession.loginSessionUser(out.loginData.username, out.loginData.password);' #txt
+out.loginData.isValid = currentSession.loginSessionUser(out.loginData.username, out.loginData.password);
+if(out.loginData.isValid == false) {FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Invalid username or password");
+  FacesContext.getCurrentInstance().addMessage(null, msg);}' #txt
 Ls0 f6 outParameterDecl '<> result;
 ' #txt
 Ls0 f6 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
